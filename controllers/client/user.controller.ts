@@ -28,7 +28,7 @@ export const registerPost = async (req: Request & { flash }, res: Response) => {
 
     const infoUser = {
         email: req.body.email,
-        fullname: req.body.fullname,
+        fullName: req.body.fullName,
         password: md5(req.body.password),
         tokenUser: generateHelper.generateRandomString(30)
     }
@@ -79,4 +79,11 @@ export const logout = (req: Request & { flash }, res: Response) => {
 
     req.flash('success', 'Logout successful');
     res.redirect('/topics');
+}
+
+//[GET] /user/profile
+export const profile = (req: Request & { flash }, res: Response) => {
+    res.render("client/pages/users/profile", {
+        pageTitle: "Thông tin tài khoản",
+    });
 }
