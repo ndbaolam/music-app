@@ -1,6 +1,10 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
+import flash from 'express-flash';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+
 import { connect as connectDatabase } from './config/database';
 import clientRoutes from './routes/client/index.route';
 
@@ -20,6 +24,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+//Flash
+app.use(cookieParser('keyboard cat'));
+app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(flash());
+//End Flash
+ 
 clientRoutes(app);
 
 app.listen(port, () => {
