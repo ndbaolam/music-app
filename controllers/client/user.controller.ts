@@ -38,7 +38,6 @@ export const registerPost = async (req: Request & { flash }, res: Response) => {
 
     //flash
     req.flash("success", "Đăng ký thành công");
-    console.log(user);
     res.redirect('/user/login');
 }
 
