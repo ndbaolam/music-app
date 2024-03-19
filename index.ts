@@ -1,9 +1,7 @@
-import express, {Request, Response, Express} from 'express';
+import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import { connect as connectDatabase } from './config/database';
 import clientRoutes from './routes/client/index.route';
-
-import Topic from './models/topic.model';
 
 dotenv.config();
 connectDatabase();
