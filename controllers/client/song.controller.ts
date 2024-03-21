@@ -36,7 +36,7 @@ export const list = async (req: Request, res: Response) => {
 }
 
 //[GET] /songs/detail/:slugSong
-export const detail = async (req: Request, res: Response) => {
+export const detail = async (req: Request, res: Response) => {  
     const slugSong = req.params.slugSong;
 
     const song = await Song.findOne({
@@ -55,8 +55,11 @@ export const detail = async (req: Request, res: Response) => {
         deleted: false,
     })
 
+    const userId: string = res.locals.user ? res.locals.user.id : "";
+    console.log(userId);
+
     const favoriteSong = await FavoriteSong.findOne({
-        userId: res.locals.user.id,
+        userId: userId,
         songId: song.id
     });
     

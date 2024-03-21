@@ -69,7 +69,7 @@ export const loginPost = async (req: Request & { flash }, res: Response) => {
 
     res.cookie("tokenUser", user.tokenUser);
 
-    req.flash('success', 'Login successful');
+    req.flash('success', 'Login successfull');
     res.redirect('/topics');
 }
 

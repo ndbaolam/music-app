@@ -208,6 +208,15 @@
   color: #b90000;
 }
 
+.inner-heart.active i{
+  color: #b90000;
+  font-weight: 900;
+}
+
+.inner-heart.active{
+  color: #b90000;
+}
+
 .singer-detail .inner-actions .inner-heart.active i {
   font-weight: 900;
 }

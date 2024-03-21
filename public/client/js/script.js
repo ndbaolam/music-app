@@ -47,24 +47,29 @@ if(showAlert){
 //Like feature
 const buttonLike = document.querySelector('[button-like]');
 if(buttonLike){
-    //Check if user already logged in
-    const cookies = document.cookie.split('; ');
-
     buttonLike.addEventListener('click', () => {
-        const isActive = buttonLike.classList.contains('active');
+        //Check if user already logged in
+        const existTokenUser = document.cookie.indexOf("tokenUser") > 0 ? true : false;
 
-        const typeLike = isActive ? 'no' : 'yes';
-        const idSong = buttonLike.getAttribute('button-like');
+        if(existTokenUser){
+    
+            const isActive = buttonLike.classList.contains('active');
 
-        fetch(`/songs/like/${typeLike}/${idSong}`, {method: 'PATCH'})
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                const spanLike = buttonLike.querySelector("[data-like]");
-                spanLike.innerHTML = data.like;
+            const typeLike = isActive ? 'no' : 'yes';
+            const idSong = buttonLike.getAttribute('button-like');
 
-                buttonLike.classList.toggle("active");
-            })
+            fetch(`/songs/like/${typeLike}/${idSong}`, {method: 'PATCH'})
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    const spanLike = buttonLike.querySelector("[data-like]");
+                    spanLike.innerHTML = data.like;
+
+                    buttonLike.classList.toggle("active");
+                })
+        } else {
+            alert('Please login first!');
+        }
     });
 }
 //End Like feature
@@ -74,21 +79,25 @@ const listButtonFavorite = document.querySelectorAll("[button-favorite]");
 if(listButtonFavorite.length > 0) {
     listButtonFavorite.forEach(buttonFavorite => {
         buttonFavorite.addEventListener("click", () => {
-            const isActive = buttonFavorite.classList.contains("active");
-        
-            const typeFavorite = isActive ? "no" : "yes";
-        
-            const idSong = buttonFavorite.getAttribute("button-favorite");
-            const link = `/songs/favorite/${typeFavorite}/${idSong}`;
-            fetch(link, {
-                method: "PATCH"
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    buttonFavorite.classList.toggle("active");
-                })
-            });
+            const existTokenUser = document.cookie.indexOf("tokenUser") > 0 ? true : false;
+
+            if(existTokenUser){
+                const isActive = buttonFavorite.classList.contains("active");
+            
+                const typeFavorite = isActive ? "no" : "yes";
+                
+                const idSong = buttonFavorite.getAttribute("button-favorite");
+                const link = `/songs/favorite/${typeFavorite}/${idSong}`;
+                fetch(link, { method: "PATCH" })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        buttonFavorite.classList.toggle("active");
+                    })
+            } else {
+                alert('Please login first!');
+            }
+        });
     });
 }
 // End Button Favorite
