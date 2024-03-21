@@ -56,7 +56,7 @@ export const detail = async (req: Request, res: Response) => {
     })
 
     const favoriteSong = await FavoriteSong.findOne({
-        userId: "",
+        userId: res.locals.user.id,
         songId: song.id
     });
     
@@ -102,23 +102,24 @@ export const like = async (req: Request, res: Response) => {
 export const favorite = async (req: Request, res: Response) => {
     const idSong: string = req.params.idSong;
     const type: string = req.params.type;
+    const userId: string = res.locals.user.id;
   
     if(type == "yes") {
       const existRecord = await FavoriteSong.findOne({
-        userId: "",
+        userId: userId,
         songId: idSong,
       });
   
       if(!existRecord) {
         const record = new FavoriteSong({
-          userId: "",
+          userId: userId,
           songId: idSong,
         });
         await record.save();
       }
     } else {
       await FavoriteSong.deleteOne({
-        userId: "",
+        userId: userId,
         songId: idSong
       });
     }
