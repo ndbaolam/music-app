@@ -40,3 +40,26 @@ export const result = async (req: Request, res: Response) => {
         songs: songs
     });
 }
+
+//[POST] /search/suggest/:keyword
+export const suggest = async (req: Request, res: Response) => {
+    const keyword: string = `${req.params.keyword}`;
+
+    const slug = convertToSlug(keyword);
+    const keywordSlugRegex = new RegExp(slug, "i");
+
+    const keywordRegex = new RegExp(keyword, 'i');
+
+    const songs =  await Song.find({
+        $or: [
+            {title: keywordRegex},
+            {slug: keywordSlugRegex}
+        ]
+    });
+
+    res.json({
+        code: 200,
+        message: "Thành công!",
+        songs: songs
+    });
+}

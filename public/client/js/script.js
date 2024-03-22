@@ -101,3 +101,69 @@ if(listButtonFavorite.length > 0) {
     });
 }
 // End Button Favorite
+
+//Search suggestions
+const boxSearch = document.querySelector('.box-search');
+if(boxSearch){
+    const inputSearch = boxSearch.querySelector('.form-control');
+
+    let timeOut;
+    inputSearch.addEventListener('keyup', (e) => {
+        const removedUl = boxSearch.querySelector('.suggest__list');
+        const keyword = inputSearch.value;
+
+        if(e.which === 27) {
+            removedUl.remove();
+            return;
+        }
+
+        clearTimeout(timeOut);
+
+        timeOut = setTimeout(() => {
+
+            if(removedUl)
+                removedUl.remove();
+
+            if((e.which >= 48 && e.which <= 90) || keyword){
+
+                const link = `/search/suggest/${keyword}`;
+
+                fetch(link, { method: 'POST' })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        const ul = document.createElement('ul');
+                        ul.classList.add('suggest__list');
+
+                        if(data.songs.length > 0){
+                            ul.innerHTML = '<div class="suggest__list--content"></div>';
+
+                            boxSearch.appendChild(ul);
+
+                            const suggetListContent = boxSearch.querySelector('.suggest__list--content');
+
+                            data.songs.forEach(song => {
+                                const li = document.createElement('li');
+                                li.classList.add('suggest__item');
+
+                                li.innerHTML += `                                    
+                                    <a href="/songs/detail/${song.slug}">                                           
+                                        <div class="is-oneline">
+                                            <span class=""><b> ${song.title}</b></span>
+                                        </div>
+                                    </a>
+                                `;
+
+                                suggetListContent.appendChild(li);
+                            });
+                        } else {
+                            ul.innerHTML = '<div class="suggest__list--content"><b>Không tìm thấy bài hát!</b></div>';
+
+                            boxSearch.appendChild(ul);
+                        }
+                    });
+            }
+        }, 500);
+    });
+}
+//End search suggestions

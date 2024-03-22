@@ -6,4 +6,6 @@ const router: Router = Router();
 
 router.get("/result", controller.result);
 
+router.post("/suggest/:keyword", controller.suggest);
+
 export const searchRoutes: Router = router;

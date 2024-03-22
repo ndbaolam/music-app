@@ -279,3 +279,49 @@
   padding: 10px 15px;
 }
 /* End singer-detail */
+
+/*search suggestion*/
+.suggest__list {
+  position: absolute;
+  overflow: hidden;
+  width: 80%;
+  height: auto;
+  min-height: 0;
+  background-color: white;
+  z-index: 5;
+  display: block;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 6px 0 rgba(32,33,36,.28);
+  padding: 13px 10px;
+  color: var(--text-primary);
+}
+
+.suggest__list--content {
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+}
+
+.suggest__item {
+  display: flex;
+  align-items: baseline;
+  border-radius: 4px;
+  padding: 8px 10px;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+}
+
+/* .is-online img{
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+} */
+/*End search suggestion*/
