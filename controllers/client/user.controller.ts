@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import md5 from 'md5';
-// Import the flash middleware
-import { flash } from "express-flash";
 
 import User from "../../models/user.model";
 

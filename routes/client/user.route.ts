@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import * as controller from "../../controllers/client/user.controller";
-import { requireAuth as requireLogin} from "../../middlewares/auth.middleware";
+import { requireAuth as requireLogin} from "../../middlewares/client/auth.middleware";
 
 const router: Router = Router();
 

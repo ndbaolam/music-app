@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { systemConfig } from "../../config/system";
 
 import Song from "../../models/song.model";
 import Topic from "../../models/topic.model";
@@ -33,4 +34,12 @@ export const create = async (req: Request, res: Response) => {
         topics: topics,
         singers: singers
     });
+}
+
+export const createPost = async (req: Request & { flash: any }, res: Response) => {
+    const song = new Song(req.body);
+    await song.save();
+
+    req.flash("success", "Thêm mới bài hát thành công!");
+    res.redirect(`/${systemConfig.prefixAdmin}/songs`);
 }

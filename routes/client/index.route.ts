@@ -5,7 +5,7 @@ import { userRoutes } from './user.route';
 import { favoriteSongRoutes } from './favorite-song.route';
 import { searchRoutes } from './search.route';
 
-import { infoUser } from '../../middlewares/user.middleware';
+import { infoUser } from '../../middlewares/client/user.middleware';
 
 const clientRoutes = (app: Express) => {
     app.use(infoUser);
