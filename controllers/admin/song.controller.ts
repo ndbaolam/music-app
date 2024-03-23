@@ -37,6 +37,15 @@ export const create = async (req: Request, res: Response) => {
 }
 
 export const createPost = async (req: Request & { flash: any }, res: Response) => {
+    //console.log(req.body)
+    if(req.body.avatar){
+        req.body.avatar = req.body.avatar[0];
+    }
+
+    if(req.body.audio){
+        req.body.audio = req.body.audio[0];
+    }
+
     const song = new Song(req.body);
     await song.save();
 
