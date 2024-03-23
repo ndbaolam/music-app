@@ -5,6 +5,7 @@ import flash from 'express-flash';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import path from "path";
+import methodOverride from "method-override";
 
 import { systemConfig } from "./config/system";
 import { connect as connectDatabase } from './config/database';
@@ -23,6 +24,8 @@ app.use(express.static(`${__dirname}/public`));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use(methodOverride('_method'));
 
 // parse application/json
 app.use(bodyParser.json())
