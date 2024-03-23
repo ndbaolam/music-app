@@ -1,0 +1,47 @@
+header.header
+    .container
+        .row.align-items-center
+            .col-2
+                .inner-logo
+                    a(href="/")
+                        img(src="/client/images/logo.svg", alt="Logo")
+
+            .col-4
+                .box-search
+                    form(
+                        action="/search/result"
+                        method="GET"
+                    )
+                        div(class="form-group d-flex mb-0")
+                            input(
+                                autocomplete="off"
+                                type="text"
+                                placeholder="Nhập từ khóa..."
+                                class="form-control"
+                                name="keyword"
+                                value=keyword
+                            )
+                            button(
+                                type="submit"
+                                class="btn btn-primary"
+                            ) Tìm
+
+            .col-4
+                .inner-menu
+                    ul
+                        li
+                            a(href="/") Trang chủ
+                        li
+                            a(href="/topics") Chủ đề
+                        if(!user)
+                            li
+                                a(href="/user/register") Đăng ký
+                            li
+                                a(href="/user/login") Đăng nhập
+                        else
+                            li
+                                a(href="/user/logout") Đăng xuất
+                            li 
+                                a(href="/user/profile") Tài khoản
+                            li 
+                                a(href="/favorite-songs") Yêu thích
